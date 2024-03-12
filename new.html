@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Booking Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<section class="book_section">
+    <div class="form_container">
+        <form id="bookingForm">
+            <!-- Your form content here -->
+            <div class="form-row">
+                <div class="col-lg-4">
+                    <div class="btn-container">
+                        <button type="button" onclick="exportToExcel()">Export to Excel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="img-box">
+        <img src="images/book-car.png" alt="">
+    </div>
+</section>
+
+<script>
+    function exportToExcel() {
+        // Sample data (replace this with your actual form data)
+        var data = [
+            ["Pick Up Location", "Drop Location", "Pick Up Date", "Return Date"],
+            ["Patna", "Aurangabad", "23/02/24", "27/02/24"]
+        ];
+
+        // Create a new workbook
+        var wb = XLSX.utils.book_new();
+        // Add a worksheet
+        var ws = XLSX.utils.aoa_to_sheet(data);
+        // Add the worksheet to the workbook
+        XLSX.utils.book_append_sheet(wb, ws, "Booking Data");
+
+        // Create a Blob from the workbook
+        var blob = XLSX.write(wb, { bookType: 'xlsx', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+        // Save the Blob as a file
+        saveAs(blob, 'booking_data.xlsx');
+    }
+
+    // SaveAs function for handling Blob download
+    function saveAs(blob, fileName) {
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = fileName;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .thank-you-message {
+            display: none;
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <form id="loginForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        <p class="thank-you-message" id="thankYouMessage">Thank you!</p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the values entered by the user
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+
+            // Hide the form
+            document.getElementById('loginForm').style.display = 'none';
+
+            // Display the thank you message with the entered values
+            var thankYouMessage = document.getElementById('thankYouMessage');
+            thankYouMessage.innerHTML = 'Thank you, ' + name + '! We appreciate your submission.';
+            thankYouMessage.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
